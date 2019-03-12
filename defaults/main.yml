@@ -13,7 +13,7 @@
     # Repository to check out -- YOU MUST CHANGE THIS
     # repo must contain a local.yml file at top level
     #repo_url: git://github.com/sfromm/ansible-playbooks.git
-    repo_url: git@github.com:smark-broad/dsp-anisble-config.git
+    repo_url: https://github.com/broadinstitute/DSP-ansible-configs.git
 
     #pull google project var
     gproject: "{{ lookup('env','GPROJECT') }}"
