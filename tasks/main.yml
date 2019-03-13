@@ -9,5 +9,3 @@
 
     - name: checkin right away vs wait 15 minutes
       shell: "/usr/local/bin/ansible/bin/ansible-pull {{ playbook }} -d {{ workdir }} -U {{ repo_url }} -i {{ inventory }} >> /tmp/ansibleintialrun.log &"
-      args:
-        creates: /var/run/ansible-onetime.pid
