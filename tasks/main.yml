@@ -8,4 +8,4 @@
       template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
 
     - name: checkin right away vs wait 15 minutes
-      shell: "/usr/local/bin/ansible/bin/ansible-pull {{ playbook }} -d {{ workdir }} -U {{ repo_url }} -i {{ inventory }} >> /tmp/ansibleintialrun.log &"
+      shell: "/usr/local/bin/ansible/bin/ansible-pull {{ playbook }} -C {{ branch }} -d {{ workdir }} -U {{ repo_url }} -i {{ inventory }} >> /tmp/ansibleintialrun.log &"
