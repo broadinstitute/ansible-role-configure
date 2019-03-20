@@ -25,4 +25,4 @@
     playbook: "{{ gproject }}.yml"
 
     #brncnhtocheckout
-    branch: master
+    branch: "{{ lookup('env','ANSIBLE_BRANCH') }}"
