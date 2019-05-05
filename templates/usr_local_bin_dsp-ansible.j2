@@ -1,0 +1,14 @@
+#!/bin/bash
+
+GOOGLE_PROJECT=$(gcloud config list --format 'value(core.project)')
+
+# hack to convert instance labels to env vars
+gcloud compute instances list --filter="name:$(hostname)" --format 'value(labels)' | tr ';' '\n' | while read var ; do key="${var%=*}"; value="${var##*=}" ; key=$(echo $key | tr '[a-z]' '[A-Z]') ; echo "export $key=\"$value\"" ; done  > /etc/bashrc-labels
+
+source /etc/bashrc-labels
+
+ANSIBLE_PROJECT=${ANSIBLE_PROJECT:-"${GOOGLE_PROJECT}"}
+ANSIBLE_REPO=${ANSIBLE_REPO:-"https://github.com/broadinstitute/dsp-ansible-configs.git"}
+
+/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -d {{ workdir }} -U ${ANSIBLE_REPO} -i {{ inventory_dir }}/${ANSIBLE_PROJECT}/hosts  >> {{ logfile }}  2>&1
+

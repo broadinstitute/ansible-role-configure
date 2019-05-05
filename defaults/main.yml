@@ -13,16 +13,16 @@
     # Repository to check out -- YOU MUST CHANGE THIS
     # repo must contain a local.yml file at top level
     #repo_url: git://github.com/sfromm/ansible-playbooks.git
-    repo_url: https://github.com/broadinstitute/DSP-ansible-configs.git
+    # repo_url: https://github.com/broadinstitute/dsp-ansible-configs.git
 
     #pull google project var
-    gproject: "{{ lookup('env','GPROJECT') }}"
+    #gproject: "{{ lookup('env','GPROJECT') }}"
 
     #set proper inverntory PATH
-    inventory: "/var/lib/ansible/local/inventories/{{ gproject }}/hosts"
+    inventory_dir: "/var/lib/ansible/local/inventories"
 
     #playbook to run
-    playbook: "{{ gproject }}.yml"
+    # playbook: "{{ gproject }}.yml"
 
     #brncnhtocheckout
-    branch: "{{ lookup('env','ANSIBLE_BRANCH') }}"
+    # branch: "{{ lookup('env','ANSIBLE_BRANCH') }}"

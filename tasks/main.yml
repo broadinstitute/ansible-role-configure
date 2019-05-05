@@ -1,6 +1,9 @@
     - name: Create local directory to work from
       file: path={{workdir}} state=directory owner=root group=root mode=0751
 
+    - name: Create dsp ansible run script
+      template: src=templates/usr_local_bin_dsp-ansible.j2 dest=/usr/local/bin/dsp-ansible.sh owner=root group=root mode=0755
+
     - name: Create crontab entry to clone/pull git repository
       template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
 
@@ -8,4 +11,4 @@
       template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
 
     - name: checkin right away vs wait 15 minutes
-      shell: "/usr/local/bin/ansible/bin/ansible-pull {{ playbook }} -C {{ branch }} -d {{ workdir }} -U {{ repo_url }} -i {{ inventory }} >> /root/ansible-pull-firstrun.log &"
+      shell: "/usr/local/bin/dsp-ansible.sh >> /root/ansible-pull-firstrun.log &"
