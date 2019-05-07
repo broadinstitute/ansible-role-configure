@@ -10,5 +10,5 @@ source /etc/bashrc-labels
 ANSIBLE_PROJECT=${ANSIBLE_PROJECT:-"${GOOGLE_PROJECT}"}
 ANSIBLE_REPO=${ANSIBLE_REPO:-"https://github.com/broadinstitute/dsp-ansible-configs.git"}
 
-/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -d {{ workdir }} -U ${ANSIBLE_REPO} -i {{ inventory_dir }}/${ANSIBLE_PROJECT}/hosts  >> {{ logfile }}  2>&1
+/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -d {{ workdir }} -U ${ANSIBLE_REPO} -i {{ invent_dir }}/${ANSIBLE_PROJECT}/hosts  >> {{ logfile }}  2>&1
 
