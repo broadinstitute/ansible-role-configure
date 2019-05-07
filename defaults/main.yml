@@ -19,7 +19,7 @@
     #gproject: "{{ lookup('env','GPROJECT') }}"
 
     #set proper inverntory PATH
-    inventory_dir: "/var/lib/ansible/local/inventories"
+    inventory_dir: /var/lib/ansible/local/inventories
 
     #playbook to run
     # playbook: "{{ gproject }}.yml"
