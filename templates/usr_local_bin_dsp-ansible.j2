@@ -22,10 +22,8 @@ ANSIBLE_REPO=${ANSIBLE_REPO:-"https://github.com/broadinstitute/dsp-ansible-conf
 mkdir -p /etc/ansible
 
 echo "[defaults]" > /etc/ansible/ansible.cfg
-echo "inventory = /var/lib/ansible/local/inventories/${ANSIBLE_PROJECT}/hosts" >> /et
-c/ansible/ansible.cfg
+echo "inventory = /var/lib/ansible/local/inventories/${ANSIBLE_PROJECT}/hosts" >> /etc/ansible/ansible.cfg
 
-/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -
-d {{ workdir}} -U ${ANSIBLE_REPO} >> {{ logfile }}  2>&1
+/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -d {{ workdir}} -U ${ANSIBLE_REPO} >> {{ logfile }}  2>&1
 
 
