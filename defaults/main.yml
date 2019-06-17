@@ -10,19 +10,6 @@
     # Directory to where repository will be cloned
     workdir: /var/lib/ansible/local
 
-    # Repository to check out -- YOU MUST CHANGE THIS
-    # repo must contain a local.yml file at top level
-    #repo_url: git://github.com/sfromm/ansible-playbooks.git
-    # repo_url: https://github.com/broadinstitute/dsp-ansible-configs.git
-
-    #pull google project var
-    #gproject: "{{ lookup('env','GPROJECT') }}"
-
     #set proper inverntory PATH
     invent_dir: /var/lib/ansible/local/inventories
 
-    #playbook to run
-    # playbook: "{{ gproject }}.yml"
-
-    #brncnhtocheckout
-    # branch: "{{ lookup('env','ANSIBLE_BRANCH') }}"
