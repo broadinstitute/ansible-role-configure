@@ -1,0 +1,31 @@
+#!/bin/bash
+
+GOOGLE_PROJECT=$(gcloud config list --format 'value(core.project)')
+
+# hack to convert instance labels to env vars
+gcloud compute instances list --filter="name:$(hostname)" --format 'value(labels)' | tr ';' '\n' | while read var ; do key="${var%=*}"; value="${var##*=}" ; key=$(echo $key | tr '[a-z]' '[A-Z]') ; echo "export $key=\"$value\"" ; done  > /etc/bashrc-labels
+
+source /etc/bashrc-labels
+LOCAL_OVERRIDES=/etc/local_overrides.sh
+if [[ -f "${LOCAL_OVERRIDES}" ]]; then
+  echo "Using local override vars from ${LOCAL_OVERRIDES}"
+  source ${LOCAL_OVERRIDES}
+fi
+
+ANSIBLE_PROJECT=${ANSIBLE_PROJECT:-"${GOOGLE_PROJECT}"}
+ANSIBLE_REPO=${ANSIBLE_REPO:-"https://github.com/broadinstitute/dsp-ansible-configs.git"}
+ANSIBLE_BRANCH=${ANSIBLE_BRANCH:-"master"}
+
+# force update ansible.cfg with inventory path.
+#  NOTE: this is to get around an odd bug with ansible-pull
+#  https://github.com/ansible/ansible/issues/17454
+#  the bug (or feature) has to do with not always doing a git pull to get updates to 
+#   the git repo IF the current inventory file does not match the current host.  
+#   End result if you accidentally screw up the patther match for a host - it will 
+#   never get any subsequent update that fixes it.  Putting the inventory file path
+#   in /etc/ansible/ansible.cfg gets around this situation.
+
+mkdir -p /etc/ansible
+
+echo "[defaults]" > /etc/ansible/ansible.cfg
+echo "inventory = /var/lib/ansible/local/inventories/${ANSIBLE_PROJECT}/hosts" >> /etc/ansible/ansible.cfg

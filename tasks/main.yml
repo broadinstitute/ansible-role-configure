@@ -1,6 +1,18 @@
     - name: Create local directory to work from
       file: path={{workdir}} state=directory owner=root group=root mode=0751
 
+    - name: Create dsp ansible pull script
+      template: src=templates/usr_local_bin_ansible-pull.j2 dest=/usr/local/bin/ansible-pull.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible run manual script
+      template: src=templates/usr_local_bin_dsp-ansible-manual.j2 dest=/usr/local/bin/dsp-ansible-manual.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible status script
+      template: src=templates/usr_local_bin_ansible-status.j2 dest=/usr/local/bin/ansible-status.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible setenv script
+      template: src=templates/usr_local_bin_set-env.j2 dest=/usr/local/bin/set-env.sh owner=root group=root mode=0755
+
     - name: Create dsp ansible run script
       template: src=templates/usr_local_bin_dsp-ansible.j2 dest=/usr/local/bin/dsp-ansible.sh owner=root group=root mode=0755
 
