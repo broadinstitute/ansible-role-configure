@@ -1,0 +1,5 @@
+#!/bin/bash
+. /usr/local/bin/set-dsp-ansible-env.sh
+echo "Refreshing ansible configs from ${ANSIBLE_REPO}:${ANSIBLE_BRANCH}"
+rm -rf /var/lib/ansible/local
+ansible-pull provisioner.yml -C ${ANSIBLE_BRANCH} -d /var/lib/ansible/local -U https://github.com/broadinstitute/dsp-ansible-configs.git -i hosts

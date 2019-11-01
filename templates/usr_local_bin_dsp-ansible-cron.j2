@@ -1,0 +1,5 @@
+#!/bin/bash
+. /usr/local/bin/set-dsp-ansible-env.sh
+/usr/local/bin/ansible/bin/ansible-pull ${ANSIBLE_PROJECT}.yml -C ${ANSIBLE_BRANCH} -d {{ workdir}} -U ${ANSIBLE_REPO} >> {{ logfile }}  2>&1
+
+

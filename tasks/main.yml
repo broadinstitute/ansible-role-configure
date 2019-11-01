@@ -1,8 +1,20 @@
     - name: Create local directory to work from
       file: path={{workdir}} state=directory owner=root group=root mode=0751
 
+    - name: Create dsp ansible pull script
+      template: src=templates/usr_local_bin_dsp-ansible-pull.j2 dest=/usr/local/bin/dsp-ansible-pull.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible run manual script
+      template: src=templates/usr_local_bin_dsp-ansible-manual.j2 dest=/usr/local/bin/dsp-ansible-manual.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible status script
+      template: src=templates/usr_local_bin_dsp-ansible-status.j2 dest=/usr/local/bin/dsp-ansible-status.sh owner=root group=root mode=0755
+
+    - name: Create dsp ansible setenv script
+      template: src=templates/usr_local_bin_set-dsp-ansible-env.j2 dest=/usr/local/bin/set-dsp-ansible-env.sh owner=root group=root mode=0755
+
     - name: Create dsp ansible run script
-      template: src=templates/usr_local_bin_dsp-ansible.j2 dest=/usr/local/bin/dsp-ansible.sh owner=root group=root mode=0755
+      template: src=templates/usr_local_bin_dsp-ansible-cron.j2 dest=/usr/local/bin/dsp-ansible-cron.sh owner=root group=root mode=0755
 
     - name: Create crontab entry to clone/pull git repository
       template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
@@ -11,4 +23,4 @@
       template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
 
     - name: checkin right away vs wait 15 minutes
-      shell: "/usr/local/bin/dsp-ansible.sh >> /root/ansible-pull-firstrun.log &"
+      shell: "/usr/local/bin/dsp-ansible-cron.sh >> /root/ansible-pull-firstrun.log &"
